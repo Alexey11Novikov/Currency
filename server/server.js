@@ -42,7 +42,7 @@ app.get("/conversCurrency", async (req, res) => {
         res.json(response.data);
     } catch (error) {
         res.status(500).send({ error: error });
-    }
+    }dsdas
 });
 
 app.get("/getCodes", async (req, res) => {
