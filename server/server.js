@@ -21,6 +21,8 @@ router.use((req, res, next) => { // router middleware
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/src", express.static(path.resolve(__dirname, '../src')));
+app.use("/style", express.static(path.resolve(__dirname, '../style')));
 
 // simple route
 app.get("/", async (req, res) => {
@@ -42,7 +44,16 @@ app.get("/conversCurrency", async (req, res) => {
         res.json(response.data);
     } catch (error) {
         res.status(500).send({ error: error });
-    }dsdas
+    }
+});
+
+app.get("/getInfo", async (req, res) => {
+    try {
+        let response = await axios.get(URL + "/enriched/GBP/JPY", headReqAuth);
+        res.json(response.data);
+    } catch (error) {
+        res.status(500).send({ error: error });
+    }
 });
 
 app.get("/getCodes", async (req, res) => {

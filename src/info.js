@@ -30,23 +30,32 @@ export const modalListener = () => {
     });
 };
 
+export const getInfo = async () => {
+    const response = await fetch("/getCodes");
+
+    const valute = await response.json();
+
+    HTMLfunc(valute.supported_codes);
+    localStorage.setItem('valuteCount', JSON.stringify(valute.supported_codes.lenght));
+};
+
 export const HTMLfunc = () => {
     let html = '';
     html = `
-<section class="modal hidden">
-    <div id=${task.id} class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 class="modal-title">${task.name}</h2>
-            <input class="task__checkbox" type="checkbox" ${isChecked} />
-            <div class="task__date">${taskDate}</div>
-            <p class="modal-description">${task.fullDesc}</p>
+    <section class="modal hidden">
+        <div id=${task.id} class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 class="modal-title">${task.name}</h2>
+                <input class="task__checkbox" type="checkbox" ${isChecked} />
+                <div class="task__date">${taskDate}</div>
+                <p class="modal-description">${task.fullDesc}</p>
+            </div>
         </div>
-    </div>
 
-<input type="email" id="email" placeholder="brendaneich@js.com" />
-<button class="btn">Submit</button>
-</section>`;
+    <input type="email" id="email" placeholder="brendaneich@js.com" />
+    <button class="btn">Submit</button>
+    </section>`;
 
     taskList.innerHTML = html;
 }
