@@ -47,9 +47,9 @@ app.get("/conversCurrency", async (req, res) => {
     }
 });
 
-app.get("/getInfo", async (req, res) => {
+app.get("/quota", async (req, res) => {
     try {
-        let response = await axios.get(URL + "/enriched/GBP/JPY", headReqAuth);
+        let response = await axios.get(URL + "/quota", headReqAuth);
         res.json(response.data);
     } catch (error) {
         res.status(500).send({ error: error });
@@ -63,7 +63,6 @@ app.get("/getCodes", async (req, res) => {
     } catch (error) {
         res.status(500).send({ error: error });
     }
-    //res.sendFile(path.join(__dirname, "index.html")); // Путь к вашему HTML файлу
 });
 
 
