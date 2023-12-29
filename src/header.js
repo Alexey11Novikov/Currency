@@ -9,8 +9,7 @@ export const fetchReq = async () => {
   HTMLfunc(lastReq.requests_remaining)
 };
 
-
-export const HTMLfunc = (stilReq) => {
+const HTMLfunc = (stilReq) => {
   const headerHTML = `
   <header class="header">
     <div class="header__container container">
@@ -22,7 +21,7 @@ export const HTMLfunc = (stilReq) => {
   </header>
 `;
 
-  header.innerHTML = headerHTML;
+header.innerHTML = headerHTML;
 }
 
 fetchReq();

@@ -1,6 +1,6 @@
 const express = require("express");
 const axios = require("axios");
-const config = require("dotenv").config()
+const config = require("dotenv").config();
 const path = require("path");
 const app = express();
 

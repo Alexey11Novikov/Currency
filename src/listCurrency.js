@@ -1,23 +1,38 @@
-import { modalListener } from "./modal.js"
+import { modalListener } from "./modal.js";
+import { getPages } from "./pagination.js";
 
 const list = document.getElementById("list-currency");
-
+import { getLocalStorage, setLocalStorage } from "./script.js";
 
 export const fetchCodes = async () => {
     const response = await fetch("/getCodes");
 
     const valute = await response.json();
+    const listCodes = valute.supported_codes;
 
-    HTMLfunc(valute.supported_codes);
+    setLocalStorage("reqCount", listCodes.length);
+    refreshArray(listCodes);
+
+    setLocalStorage("pageNumber", 1);
 };
 
-export const HTMLfunc = (arrayCurrency) => {
+export const refreshArray = (resArray) => {
+
+    let subArray = [];
+
+    let selectPage = getLocalStorage("pageNumber");
+
+    subArray = resArray.slice(((selectPage - 1) * 15), ((selectPage - 1) * 15) + 15);
+    HTMLfunc(subArray);
+}
+
+const HTMLfunc = (arrayCurrency) => {
     let html = ``;
-    arrayCurrency.forEach(element => {
+    arrayCurrency.forEach(elements => {
         html += `<div class="list-block">
         <div class="grid">
-            <span>${element[1]}</span>
-            <button class="btnRound _openModalBtn" data-modal=${element[0]}>
+            <span>${elements[1]}</span>
+            <button class="btnRound _openModalBtn" data-modal=${elements[0]}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                     <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
@@ -32,19 +47,18 @@ export const HTMLfunc = (arrayCurrency) => {
         </div>
     </div>
     
-    
-    
-    <div id=${element[0]} class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2 class="modal-title">Введите сумму которую хотите конвертировать</h2>
-      <input type="text" name="firstname">
-    </div>
-  </div>`
+    <div id=${elements[0]} class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 class="modal-title">Введите сумму которую хотите конвертировать</h2>
+            <input type="text" name="firstname">
+        </div>
+    </div>`
     });
 
     list.innerHTML = html;
     modalListener();
+    getPages();
 }
 
 fetchCodes();

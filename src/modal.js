@@ -1,6 +1,3 @@
-
-const taskList = document.querySelector("task-list");
-
 export const modalListener = () => {
     const openModalBtns = document.querySelectorAll("._openModalBtn");
 
@@ -29,28 +26,3 @@ export const modalListener = () => {
         });
     });
 };
-
-export const getInfo = async (targetCurrency) => {
-    const response = await fetch("/getInfo?currency=" + targetCurrency);
-
-    const valute = await response.json();
-
-    HTMLfunc(valute.target_data, targetCurrency);
-};
-
-export const HTMLfunc = (infoCurred, targetCurrency) => {
-    let html = '';
-    html = `
-    <div id=${targetCurrency} class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2 class="modal-title">${infoCurred.currency_name}</h2>
-      <input class="task__checkbox" type="checkbox" ${infoCurred} />
-      <div class="task__date">Symbol: &#${infoCurred.display_symbol};</div>
-     <img src=${infoCurred.flag_url}>
-    </div>
-  </div> `;
-
-    taskList.innerHTML = html;
-}
-
