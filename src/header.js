@@ -1,12 +1,12 @@
-
+import { fetchCodes } from "./listCurrency.js";
 const header = document.getElementById("header");
-
 
 export const fetchReq = async () => {
   const response = await fetch("/quota");
 
   const lastReq = await response.json();
-  HTMLfunc(lastReq.requests_remaining)
+  HTMLfunc(lastReq.requests_remaining);
+
 };
 
 const HTMLfunc = (stilReq) => {
@@ -21,7 +21,8 @@ const HTMLfunc = (stilReq) => {
   </header>
 `;
 
-header.innerHTML = headerHTML;
+  header.innerHTML = headerHTML;
 }
 
 fetchReq();
+fetchCodes();

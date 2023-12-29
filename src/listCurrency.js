@@ -60,5 +60,3 @@ const HTMLfunc = (arrayCurrency) => {
     modalListener();
     getPages();
 }
-
-fetchCodes();
