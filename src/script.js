@@ -1,3 +1,5 @@
+import { fetchCodes } from './listCurrency.js';
+
 export const leftBorder = (portionNumber, portionSize) => {
     return (portionNumber - 1) * portionSize + 1;
 }
@@ -11,5 +13,22 @@ export const setLocalStorage = (key, item) => {
 }
 
 export const getLocalStorage = (key) => {
-   return localStorage.getItem(key);
+    return localStorage.getItem(key);
+}
+
+export const fetchConvers = () => {
+    const convers = document.querySelectorAll(".convers");
+    convers.forEach((btn) => {
+        btn.addEventListener("click", async function () {
+            const id = btn.getAttribute("data-target");
+            try {
+                const response = await fetch("/latest?currensy=" + id);
+                const res = await response.json();
+                setLocalStorage("conversRates", JSON.stringify(res.conversion_rates));
+                fetchCodes();
+            } catch (error) {
+                console.log(error);
+            }
+        });
+    });
 }

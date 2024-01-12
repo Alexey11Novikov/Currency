@@ -31,7 +31,7 @@ app.get("/", async (req, res) => {
 
 app.get("/latest", async (req, res) => {
     try {
-        let response = await axios.get(URL + "/latest/USD", headReqAuth)
+        let response = await axios.get(URL + "/latest/" + req.query.currensy, headReqAuth)
         res.json(response.data);
     } catch (error) {
         res.status(500).send({ error: error });
@@ -40,7 +40,7 @@ app.get("/latest", async (req, res) => {
 
 app.get("/conversCurrency", async (req, res) => {
     try {
-        let response = await axios.get(URL + "/pair/RUB/USD", headReqAuth);
+        let response = await axios.get(URL + "/pair/" + req.query.oneCurr + "/" + req.query.twoCurr, headReqAuth);
         res.json(response.data);
     } catch (error) {
         res.status(500).send({ error: error });
