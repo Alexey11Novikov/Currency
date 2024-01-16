@@ -1,11 +1,11 @@
+let firstValue = '';
+let secondValue = '';
 export const modalListener = () => {
     const openModalBtns = document.querySelectorAll("._openModalBtn");
-    let firstValue = '';
-    let secondValue = '';
     openModalBtns.forEach((btn) => {
         btn.addEventListener("click", function () {
             // Получаем значение атрибута data-modal для соответствующего модального окна
-            //const btnId = btn.getAttribute("data-modal");
+            //const btnId = btn.("modal-title");
 
             btn.setAttribute("disabled", "disabled");
             if (firstValue === '') {
@@ -49,5 +49,4 @@ const fetchCodes = async (oneCurr, twoCurr, amount = 1) => {
 
     const inputTwo = document.getElementById("two");
     inputTwo.setAttribute("value", conversValue.conversion_result);
-
 };
