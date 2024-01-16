@@ -36,7 +36,6 @@ export const getPages = (portionSize = 5) => {
     }
 
     htmlPages += `</div>`;
-
     pagination.innerHTML = htmlPages;
     control();
 }

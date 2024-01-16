@@ -1,28 +1,53 @@
 export const modalListener = () => {
     const openModalBtns = document.querySelectorAll("._openModalBtn");
-
+    let firstValue = '';
+    let secondValue = '';
     openModalBtns.forEach((btn) => {
         btn.addEventListener("click", function () {
             // Получаем значение атрибута data-modal для соответствующего модального окна
-            const modalId = btn.getAttribute("data-modal");
-            
-            const modal = document.getElementById(modalId);
+            //const btnId = btn.getAttribute("data-modal");
 
-            // Показываем модальное окно
-            modal.style.display = "block";
+            btn.setAttribute("disabled", "disabled");
+            if (firstValue === '') {
+                firstValue = btn.id;
+            }
+            else {
+                secondValue = btn.id;;
+                const modal = document.querySelector(".modal");
+                // Показываем модальное окно
+                modal.style.display = "block";
+                fetchCodes(firstValue, secondValue);
+                const input = document.getElementById("one");
 
-            // Добавляем слушатель события клика на кнопку "закрыть"
-            const closeModal = modal.querySelector(".close");
-            closeModal.addEventListener("click", function () {
-                modal.style.display = "none";
-            });
+                input.setAttribute("value", 1);
 
-            // Добавляем слушатель события клика вне модального окна для его закрытия
-            window.addEventListener("click", function (event) {
-                if (event.target === modal) {
+                // Добавляем слушатель события клика на кнопку "закрыть"
+                const closeModal = modal.querySelector(".close");
+                closeModal.addEventListener("click", function () {
                     modal.style.display = "none";
-                }
-            });
+                    removeDisabled(openModalBtns);
+                    firstValue = '';
+                    secondValue = '';
+                });
+            }
         });
     });
+};
+
+//Удаляем свойство disabled с кнопок
+const removeDisabled = (openModalBtns) => {
+    openModalBtns.forEach((btn) => {
+        btn.removeAttribute("disabled", "disabled");
+    });
+}
+
+
+const fetchCodes = async (oneCurr, twoCurr, amount = 1) => {
+    const response = await fetch("/conversCurrency?oneCurr=" + oneCurr + "&twoCurr=" + twoCurr + "&amount=" + amount);
+
+    const conversValue = await response.json();
+
+    const inputTwo = document.getElementById("two");
+    inputTwo.setAttribute("value", conversValue.conversion_result);
+
 };

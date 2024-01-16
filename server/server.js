@@ -12,6 +12,7 @@ router.use(
         extended: true
     })
 )
+
 router.use(express.json())
 router.use((req, res, next) => { // router middleware
     res.header("Access-Control-Allow-Origin", process.env.ORIGIN || "*");
@@ -40,7 +41,8 @@ app.get("/latest", async (req, res) => {
 
 app.get("/conversCurrency", async (req, res) => {
     try {
-        let response = await axios.get(URL + "/pair/" + req.query.oneCurr + "/" + req.query.twoCurr, headReqAuth);
+        let response = await axios.get(URL + "/pair/" + req.query.oneCurr +
+            "/" + req.query.twoCurr + "/" + req.query.amount, headReqAuth);
         res.json(response.data);
     } catch (error) {
         res.status(500).send({ error: error });
@@ -64,7 +66,6 @@ app.get("/getCodes", async (req, res) => {
         res.status(500).send({ error: error });
     }
 });
-
 
 
 // set port, listen for requests
