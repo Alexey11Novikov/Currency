@@ -10,6 +10,12 @@
     background-color: rgba(0, 0, 0, 0.7);
 }
 
+.textInput {
+    font-size: 14pt;
+    width: 150px;
+    margin: 5px 10px;
+}
+
 /* Отобразить модальное окно */
 .modal-content {
     background-color: #fefefe;
