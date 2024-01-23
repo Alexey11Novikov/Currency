@@ -1,4 +1,4 @@
-import { modalListener } from "./modal.js";
+import { modalListener, eventListenerInput } from "./modal.js";
 import { getPages } from "./pagination.js";
 
 const list = document.getElementById("list-currency");
@@ -29,7 +29,7 @@ const HTMLfunc = (arrayCurrency) => {
     arrayCurrency.forEach(elements => {
         html += `<div class="list-block">
         <div class="grid">
-            <span>${elements[1]}</span>
+            <span>${elements[1]} ( ${elements[0]} )</span>
             <button class="btnRound convers" data-target=${elements[0]}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -49,11 +49,16 @@ const HTMLfunc = (arrayCurrency) => {
         <span class="close">&times;</span>
             <h2 class="modal-title">Конвертация</h2>
             <div>
-                <input class="textInput" id="one" type="text" name="count">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-right" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5m14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5"/>
-                </svg>
-                <input class="textInput" id="two" type="text" name="count">
+                <input class="textInput" id="valueConvers">
+                <label id="elem1"></label>
+                <span id="iconBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5m14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5"/>
+                    </svg>
+                </span>
+                <input class="textInput" id="resultConvers" readonly>
+                <label id="elem2"></label>
+                <input type="button" value="Convert">
             </div>
         </div>
     </div>`
@@ -61,6 +66,7 @@ const HTMLfunc = (arrayCurrency) => {
     list.innerHTML = html;
 
     modalListener();
+    eventListenerInput();
     fetchConvers();
     getPages();
 }
