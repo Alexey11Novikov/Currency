@@ -37,11 +37,11 @@ export const getPages = (portionSize = 5) => {
 
     htmlPages += `</div>`;
     pagination.innerHTML = htmlPages;
-    control();
+    controlBtn();
 }
 
 
-const control = () => {
+const controlBtn = () => {
     const numberPage = document.querySelectorAll(".numberPage");
     numberPage.forEach((btn) => {
         btn.addEventListener("click", function () {

@@ -12,8 +12,9 @@ export const fetchCodes = async () => {
 
     setLocalStorage("reqCount", listCodes.length);
     refreshArray(listCodes);
-
-    setLocalStorage("pageNumber", 1);
+    if (!getLocalStorage("pageNumber")) {
+        setLocalStorage("pageNumber", 1);
+    }
 };
 
 export const refreshArray = (resArray) => {
