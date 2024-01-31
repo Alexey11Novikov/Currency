@@ -1,3 +1,5 @@
+import { fetchconversCurrency } from "./script.js";
+
 let firstValue = '';
 let secondValue = '';
 
@@ -16,7 +18,7 @@ export const modalListener = () => {
                 // Показываем модальное окно
                 modal.style.display = "block";
                 labelConvert();
-                fetchCodes(firstValue, secondValue);
+                fetchconversCurrency(firstValue, secondValue);
 
                 const input = document.getElementById("valueConvers");
 
@@ -44,7 +46,6 @@ const keydownInput = (input) => {
             (event.key == 'Ctrl+A' && event.ctrlKey === true) ||
             // Разрешаем: home, end, влево, вправо
             (event.key >= 'End' && event.key <= 'ArrowRight')) {
-
             // Ничего не делаем
             return;
         } else {
@@ -56,6 +57,8 @@ const keydownInput = (input) => {
     });
 }
 
+
+//надписи валюты
 const labelConvert = () => {
     const elem1 = document.getElementById("elem1");
     elem1.innerText = firstValue;
@@ -66,7 +69,7 @@ const labelConvert = () => {
 export const eventListenerInput = () => {
     const input = document.getElementById("valueConvers");
     input.addEventListener("change", function (event) {
-        fetchCodes(firstValue, secondValue, event.target.value);
+        fetchconversCurrency(firstValue, secondValue, event.target.value);
     })
 }
 
@@ -79,11 +82,18 @@ const removeDisabled = (openModalBtns) => {
 }
 
 
-const fetchCodes = async (oneCurr, twoCurr, amount = 1) => {
-    const response = await fetch("/conversCurrency?oneCurr=" + oneCurr + "&twoCurr=" + twoCurr + "&amount=" + amount);
-
-    const conversValue = await response.json();
-
-    const inputTwo = document.getElementById("resultConvers");
-    inputTwo.setAttribute("value", Math.round(conversValue.conversion_result * 1000) / 1000);
-};
+//Кнопка Поменять местами валюту
+export const backCurrency = () => {
+    const spanBtn = document.querySelector(".btnBack");
+    spanBtn.addEventListener("click", function () {
+        if (firstValue !== '' && secondValue !== '') {
+            let temp = '';
+            temp = firstValue;
+            firstValue = secondValue;
+            secondValue = temp;
+            labelConvert();
+            const input = document.getElementById("valueConvers").value;
+            fetchconversCurrency(firstValue, secondValue,input);
+        }
+    })
+}

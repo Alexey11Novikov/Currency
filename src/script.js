@@ -41,3 +41,13 @@ export const fetchConvers = () => {
         });
     });
 }
+
+
+export const fetchconversCurrency = async (oneCurr, twoCurr, amount = 1) => {
+    const response = await fetch("/conversCurrency?oneCurr=" + oneCurr + "&twoCurr=" + twoCurr + "&amount=" + amount);
+
+    const conversValue = await response.json();
+
+    const inputTwo = document.getElementById("resultConvers");
+    inputTwo.setAttribute("value", Math.round(conversValue.conversion_result * 1000) / 1000);
+};

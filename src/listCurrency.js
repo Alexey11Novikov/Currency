@@ -1,4 +1,4 @@
-import { modalListener, eventListenerInput } from "./modal.js";
+import { modalListener, eventListenerInput, backCurrency } from "./modal.js";
 import { getPages } from "./pagination.js";
 
 const list = document.getElementById("list-currency");
@@ -52,11 +52,11 @@ const HTMLfunc = (arrayCurrency) => {
             <div>
                 <input class="textInput" id="valueConvers">
                 <label id="elem1"></label>
-                <span id="iconBtn">
+                <button class="btnBack">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-right" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5m14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5"/>
                     </svg>
-                </span>
+                </button>
                 <input class="textInput" id="resultConvers" readonly>
                 <label id="elem2"></label>
                 <input type="button" value="Convert">
@@ -68,6 +68,7 @@ const HTMLfunc = (arrayCurrency) => {
 
     modalListener();
     eventListenerInput();
+    backCurrency()
     fetchConvers();
     getPages();
 }

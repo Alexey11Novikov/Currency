@@ -16,6 +16,12 @@
     margin: 5px 10px;
 }
 
+.btnBack {
+    border: none;
+    background: white;
+    cursor: pointer;
+}
+
 /* Отобразить модальное окно */
 .modal-content {
     background-color: #fefefe;
