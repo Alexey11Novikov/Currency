@@ -6,6 +6,10 @@ const pagination = document.getElementById("pagination");
 let portionNumber = 1;
 let selectPage = 1;
 
+if (getLocalStorage("pageNumber")) {
+    selectPage = +getLocalStorage("pageNumber");
+}
+
 export const getPages = (portionSize = 5) => {
     let pagesSum = parseInt(getLocalStorage("reqCount"));
 
@@ -58,7 +62,6 @@ const controlBtn = () => {
         prevBtn.addEventListener("click", function () {
             portionNumber -= 1;
             getPages();
-            setLocalStorage("pageNumber", selectPage);
         })
 
     const nextBtn = document.querySelector(".nextBtn");

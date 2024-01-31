@@ -26,7 +26,7 @@ export const getSessionStorage = (key) => {
 
 export const fetchConvers = () => {
     const convers = document.querySelectorAll(".convers");
-    
+
     convers.forEach((btn) => {
         btn.addEventListener("click", async function () {
             const id = btn.getAttribute("data-target");

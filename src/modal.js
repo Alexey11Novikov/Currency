@@ -5,8 +5,6 @@ export const modalListener = () => {
     const openModalBtns = document.querySelectorAll("._openModalBtn");
     openModalBtns.forEach((btn) => {
         btn.addEventListener("click", function () {
-            // Получаем значение атрибута data-modal для соответствующего модального окна
-            //const btnId = btn.("modal-title");
 
             btn.setAttribute("disabled", "disabled");
             if (firstValue === '') {
