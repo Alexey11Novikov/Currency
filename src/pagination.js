@@ -1,17 +1,18 @@
 import { leftBorder, rightBorder, getLocalStorage, setLocalStorage } from "./script.js";
 import { fetchCodes } from './listCurrency.js';
+import { KEY_STORAGE } from "./keyValueStorageEnum.js"
 
 const pagination = document.getElementById("pagination");
 
 let portionNumber = 1;
 let selectPage = 1;
 
-if (getLocalStorage("pageNumber")) {
-    selectPage = +getLocalStorage("pageNumber");
+if (getLocalStorage(KEY_STORAGE.PAGE_NUMBER)) {
+    selectPage = +getLocalStorage(KEY_STORAGE.PAGE_NUMBER);
 }
 
 export const getPages = (portionSize = 5) => {
-    let pagesSum = parseInt(getLocalStorage("reqCount"));
+    let pagesSum = parseInt(getLocalStorage(KEY_STORAGE.COUNT_ARRAY_MAIN));
 
     let htmlPages = `<div class="pagination">`;
 
@@ -52,7 +53,7 @@ const controlBtn = () => {
             let numberSelect = btn.innerHTML;
             selectPage = parseInt(numberSelect);
             getPages();
-            setLocalStorage("pageNumber", selectPage);
+            setLocalStorage(KEY_STORAGE.PAGE_NUMBER, selectPage);
             fetchCodes();
         })
     })

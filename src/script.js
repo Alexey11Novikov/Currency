@@ -1,4 +1,5 @@
 import { fetchCodes } from './listCurrency.js';
+import { KEY_STORAGE } from "./keyValueStorageEnum.js"
 
 export const leftBorder = (portionNumber, portionSize) => {
     return (portionNumber - 1) * portionSize + 1;
@@ -33,7 +34,7 @@ export const fetchConvers = () => {
             try {
                 const response = await fetch("/latest?currensy=" + id);
                 const res = await response.json();
-                setSessionStorage("conversRates", JSON.stringify(res.conversion_rates));
+                setSessionStorage(KEY_STORAGE.CONVERS_RATE_ARRAY, JSON.stringify(res.conversion_rates));
                 fetchCodes();
             } catch (error) {
                 console.log(error);
